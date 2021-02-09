@@ -1,0 +1,11 @@
+
+Dentro da pasta que está o projeto faça os seguintes passos
+
+1º npm install 
+
+2º npm install firebase @angular/fire --save
+
+3º npm install firebase angularfire2 --save
+
+Depois só ser triste
+
