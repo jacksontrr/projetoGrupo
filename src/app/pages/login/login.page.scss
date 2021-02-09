@@ -1,29 +1,30 @@
-// Fundo do login
-.fundo{
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0 ;
-  height: 80%;
-  background: rgb(63, 63, 255);
+ion-slides {
+  height: 100%; // Posição da dive
+
+  .slide-inner{ // Alteração do quadrado da div
+    width: 70%;
+    color: white;
+    background-color: blue;
+    border-radius: 10px;
+  }
 }
 
-ion-slides {
-  height: 200%; // Posição do quadrado
+// Fundo
+.ocean {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 80%;
+  background: rgb(63, 63, 255);
 
-  .slide-inner {
-      width: 75%;
-      color: #fff;
-      background-color: #0072bc;
-      border-radius: 10px;
-
-      ion-item {
-          --background: rgba(255, 255, 255, 0.2);
-          --border-radius: 10px;
-
-          ion-input {
-              --color: #fff;
-          }
-      }
+  span {
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    bottom: 20%;
+    width: 100%;
+    margin: 0 auto;
+    color: white;
   }
 }

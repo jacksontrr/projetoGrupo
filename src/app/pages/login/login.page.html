@@ -1,53 +1,51 @@
+<ion-content>
+  <ion-slides>
+    <ion-slide>
+      <div class="slide-inner ion-padding">
+        <span>Login</span>
 
-<ion-slides>
-  <ion-slide>
-    <div class="slide-inner ion-padding">
-      <span>Login</span>
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="email" placeholder="E-mail"></ion-input>
+        </ion-item>
 
-      <ion-item class="ion-margin-top" lines="none">
-        <ion-input type="email" placeholder="E-mail" [(ngModel)]="userLogin.email"></ion-input>
-      </ion-item>
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="password" placeholder="Senha"></ion-input>
+        </ion-item>
 
-      <ion-item class="ion-margin-top" lines="none">
-        <ion-input type="password" placeholder="Senha" [(ngModel)]="userLogin.password"></ion-input>
-      </ion-item>
-
-      <ion-button class="ion-margin-top" (click)="login()" color="light" expand="block">
-        Entrar
-      </ion-button>
-    </div>
-  </ion-slide>
-
-  <ion-slide>
-    <div class="slide-inner ion-padding">
-      <span>Cadastro</span>
-
-      <ion-item class="ion-margin-top" lines="none">
-        <ion-input type="text" placeholder="Nome"></ion-input>
-      </ion-item>
-
-      <ion-item class="ion-margin-top" lines="none">
-        <ion-input type="email" placeholder="E-mail" [(ngModel)]="userRegister.email"></ion-input>
-      </ion-item>
-
-      <ion-item class="ion-margin-top" lines="none">
-        <ion-input type="password" placeholder="Senha" [(ngModel)]="userRegister.password"></ion-input>
-      </ion-item>
-
-      <ion-button class="ion-margin-top" (click)="register()" color="light" expand="block">
-        Cadastrar
-      </ion-button>
-    </div>
-  </ion-slide>
-</ion-slides>
-
-  <ion-content>
-    <div class="fundo">
-      <div class="waves"></div>
-
-      <div class="contatiner ion-text-center">
-        <span>tela de login</span>
+        <ion-button class="ion-margin-top" (click)="login()" color="light" expand="block">Entrar</ion-button>
       </div>
-    </div>
+    </ion-slide>
 
-  </ion-content>
+    <ion-slide>
+      <div class="slide-inner ion-padding">
+        <span>Cadastro</span>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="text" placeholder="Nome"></ion-input>
+        </ion-item>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="email" placeholder="E-mail"></ion-input>
+        </ion-item>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="password" placeholder="Senha"></ion-input>
+        </ion-item>
+
+        <ion-button class="ion-margin-top" (click)="register()" color="light" expand="block">
+          Cadastrar
+        </ion-button>
+      </div>
+    </ion-slide>
+  </ion-slides>
+
+
+  <div class="ocean">
+
+
+    <div class="contatiner ion-text-center">
+      <span>(frase do app)</span>
+    </div>
+  </div>
+
+</ion-content>
