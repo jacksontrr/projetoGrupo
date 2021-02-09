@@ -1,0 +1,29 @@
+// Fundo do login
+.fundo{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0 ;
+  height: 80%;
+  background: rgb(63, 63, 255);
+}
+
+ion-slides {
+  height: 200%; // Posição do quadrado
+
+  .slide-inner {
+      width: 75%;
+      color: #fff;
+      background-color: #0072bc;
+      border-radius: 10px;
+
+      ion-item {
+          --background: rgba(255, 255, 255, 0.2);
+          --border-radius: 10px;
+
+          ion-input {
+              --color: #fff;
+          }
+      }
+  }
+}
