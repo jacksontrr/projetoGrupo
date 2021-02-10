@@ -1,5 +1,5 @@
-ion-slides {
-  height: 100%; // Posição da dive
+ion-slide {
+  height: 90%; // Posição da dive
 
   .slide-inner{ // Alteração do quadrado da div
     width: 70%;
@@ -9,22 +9,3 @@ ion-slides {
   }
 }
 
-// Fundo
-.ocean {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 80%;
-  background: rgb(63, 63, 255);
-
-  span {
-    position: absolute;
-    left: 0%;
-    right: 0%;
-    bottom: 20%;
-    width: 100%;
-    margin: 0 auto;
-    color: white;
-  }
-}
