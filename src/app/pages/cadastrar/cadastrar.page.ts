@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, NavController,} from '@ionic/angular'; //Importação feita
+import { LoadingController, NavController, ToastController} from '@ionic/angular'; //Importação feita
 
-import { Usuariocli, Usuarioprof } from '../../models/usuario.model'
+import { Usuariocli, Usuarioprof } from '../../models/usuario.model' // Importação feita
+import { AngularFireAuth } from "@angular/fire/auth"; //Importação feita
 
 
 @Component({
@@ -13,6 +14,8 @@ export class CadastrarPage implements OnInit {
 
   constructor(
     private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
+    private afAuth: AngularFireAuth,
     private navCtrl: NavController) { }
 
   ngOnInit() {
@@ -25,6 +28,11 @@ export class CadastrarPage implements OnInit {
       document.getElementById('#').style.display = 'block';
     }
   }
+
+  async cadastrar(usuario: Usuario) {
+
+  }
+
 
 
   formValidation() {
