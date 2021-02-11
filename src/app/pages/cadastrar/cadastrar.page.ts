@@ -29,8 +29,28 @@ export class CadastrarPage implements OnInit {
     }
   }
 
-  async cadastrar(usuario: Usuario) {
-
+  async cadastrar(usuario: Usuariocli) {
+    if (this.formValidation()) {
+      // mostrar loader
+      let loader = await this.loadingCtrl.create({
+        message: "Por Favor espere...",
+      });
+      loader.present();
+      try {
+        // entrar com usuário e senha
+        await this.afAuth.createUserWithEmailAndPassword(usuario.email, usuario.senha)
+          .then((dados) => {
+            console.log(dados);
+            // redirecionar para a página home
+            this.navCtrl.navigateRoot("home");
+          })
+          .catch();
+      } catch (e) {
+        this.espera(e);
+      }
+      // dispensar loader
+      loader.dismiss();
+    }
   }
 
 
@@ -38,16 +58,25 @@ export class CadastrarPage implements OnInit {
   formValidation() {
     if (!this.usuario.email) {// !this.usuario.email
       // mostrar toast message
-      this.showToast("Digite seu e-mail");
+      this.espera("Digite seu e-mail");
       return false;
     }
     if (!this.usuario.senha) { // !this.usuario.senha
       // mostrar toast message
-      this.showToast("Digite sua Senha");
+      this.espera("Digite sua Senha");
       return false;
     }
     return true; 
   }
+
+  async espera(mensagem: string) { //Tela de load
+    let aguarde = await this.loadingCtrl.create({
+      message: "Aguarde por favor...",
+      duration: 900,
+    });    
+  }
+
+
 
   async outrapragina() { //Tela de load
     let aguarde = await this.loadingCtrl.create({
