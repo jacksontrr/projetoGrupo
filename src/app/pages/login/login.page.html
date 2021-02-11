@@ -5,27 +5,30 @@
         <span>Login</span>
 
         <ion-item class="ion-margin-top" lines="none">
-          <ion-input type="email" placeholder="E-mail"></ion-input>
+          <ion-label position="floating">E-mail</ion-label>
+          <ion-input type="email"></ion-input>
         </ion-item>
 
         <ion-item class="ion-margin-top" lines="none">
-          <ion-input type="password" placeholder="Senha"></ion-input>
+          <ion-label position="floating">Senha</ion-label>
+          <ion-input type="password"></ion-input>
         </ion-item>
 
         <ion-button class="ion-margin-top" (click)="login()" color="light" expand="block">Entrar</ion-button>
       </div>
     </ion-slide>
 
-    <ion-row style="padding-bottom: 1%">
+
+    <ion-row>
       <ion-col size="6">
-        <ion-button class="ion-text-center" expand="block" (click)="loginaparecer()">Fazer login</ion-button>
+        <ion-button class="ion-text-center" color="primary" expand="block" (click)="loginaparecer()">Fazer login</ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button class="ion-text-center" expand="block" [routerLink]="['/cadastrar']">Cadastrar</ion-button>
+        <ion-button class="ion-text-center" color="primary" expand="block" (click)="outrapragina()">Cadastrar</ion-button>
       </ion-col>
     </ion-row>
+    
+   
   </div>
 
 </ion-content>
-
-
