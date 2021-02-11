@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  LoadingController,
-  NavController,
-} from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular'; //Importação feita
 
 @Component({
   selector: 'app-login',
@@ -12,7 +9,7 @@ import {
 export class LoginPage implements OnInit {
   constructor(
     private loadingCtrl: LoadingController,
-    private navCtrl: NavController
+    private navCtrl: NavController 
   ) {}
 
   ngOnInit() {}
@@ -25,18 +22,14 @@ export class LoginPage implements OnInit {
     }
   }
 
-  async outrapragina() {
-  
-
+  async outrapragina() { //Tela de load
     let aguarde = await this.loadingCtrl.create({
-      message: "Aguarde por favor...",
+      message: 'Aguarde por favor...',
       duration: 900,
     });
 
-    
-    aguarde.present();
-    this.navCtrl.navigateRoot('cadastrar');
-    aguarde.present();
-    
+    aguarde.present(); //Iniciar a tela de load.
+    this.navCtrl.navigateRoot('cadastrar'); //Rota, a string inserido nas aspas será direcionado.
+    aguarde.present(); //Encerrar a tela de load.
   }
 }

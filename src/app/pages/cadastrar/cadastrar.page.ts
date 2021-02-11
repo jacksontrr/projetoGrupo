@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  LoadingController,
-  NavController,
-} from '@ionic/angular';
+import { LoadingController, NavController,} from '@ionic/angular'; //Importação feita
 
 @Component({
   selector: 'app-cadastrar',
