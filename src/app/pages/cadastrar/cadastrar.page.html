@@ -2,31 +2,16 @@
 
   <ion-row>
     <ion-col size="6">
-      <ion-button class="ion-text-center" (click)="mudancaprof()" style="margin-top: 5%;" color="primary" expand="block">Profissional</ion-button>
+      <ion-button class="ion-text-center" (click)="aparecercli()" style="margin-top: 5%;" color="primary" expand="block">Profissional</ion-button>
     </ion-col>
     <ion-col size="6">
-      <ion-button class="ion-text-center"  (click)="mudancacli()" style="margin-top: 5%;" color="primary" expand="block">Cliente</ion-button>
+      <ion-button class="ion-text-center" (click)="aparecerprof()" style="margin-top: 5%;" color="primary" expand="block">Cliente</ion-button>
     </ion-col>
   </ion-row>
-  
 
 
-  <ion-item>
-    <ion-label position="floating" >Nome</ion-label>
-    <ion-input type="text" required></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Endereço</ion-label>
-    <ion-input type="text" required></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Telefone</ion-label>
-    <ion-input type="text" required></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">CPF</ion-label>
-    <ion-input type="text" required></ion-input>
-  </ion-item>
+
+
   <ion-item>
     <ion-label position="floating">E-mail</ion-label>
     <ion-input type="E-mail" required></ion-input>
@@ -36,17 +21,61 @@
     <ion-input type="password" required></ion-input>
   </ion-item>
 
-      
-    
+  <div id="formcadastroprof">
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Endereço</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Telefone</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">CPF/CNPJ</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">Nome da Empresa</ion-label>
+        <ion-input type="text" required></ion-input>
+      </ion-item>
   
+  
+  
+  </div>
+  
+  <div id="formcadastrocli">
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Endereço</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Telefone</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">CPF</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+    <div id="aparecerprof">
+      <ion-button class="success" expand="block">Cadastrar Profissional</ion-button>
+    </div>
+    
+  </div>
 
 </ion-content>
-  <ion-row>
-    <ion-col size="6">
-      <ion-button class="ion-text-center" expand="block" color="success" (click)="cadastrar(usuario)">Registrar</ion-button>
-    </ion-col>
-    <ion-col size="6">
-      <ion-button class="ion-text-center" expand="block" (click)="outrapragina()">Voltar</ion-button>
-    </ion-col>
-  </ion-row>
-
+<ion-row>
+  <ion-col size="6">
+    <ion-button class="ion-text-center" expand="block" color="success" (click)="registrar()" >Continuar</ion-button>
+  </ion-col>
+  <ion-col size="6">
+    <ion-button class="ion-text-center" expand="block" (click)="outrapragina()">Voltar</ion-button>
+  </ion-col>
+</ion-row>

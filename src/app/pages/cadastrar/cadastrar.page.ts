@@ -21,13 +21,55 @@ export class CadastrarPage implements OnInit {
   ngOnInit() {
   }
 
-  mudancaprof() {
-    if (document.getElementById('#').style.display == 'block') {
-      document.getElementById('#').style.display = 'none';
+  aparecercadastro() {
+    if (document.getElementById('formcadastrar').style.display == 'block') {
+      document.getElementById('formcadastrar').style.display = 'none';
     } else {
-      document.getElementById('#').style.display = 'block';
+      document.getElementById('formcadastrar').style.display = 'block';
     }
   }
+  aparecercli() {
+    if (document.getElementById('formcadastroprof').style.display == 'block') {
+      document.getElementById('formcadastroprof').style.display = 'none';
+      document.getElementById('formcadastrocli').style.display = 'block';
+    } else {
+      document.getElementById('formcadastrocli').style.display = 'block';
+    }
+  }
+  aparecerprof() {
+    if (document.getElementById('formcadastrocli').style.display == 'block') {
+      document.getElementById('formcadastrocli').style.display = 'none';
+      document.getElementById('formcadastroprof').style.display = 'block';
+    } else {
+      document.getElementById('formcadastroprof').style.display = 'block';
+    }
+  }
+
+
+  
+  //se for none seleciona cliente ou profissão
+
+  registrar(){
+    var divocultaprof = document.getElementById('formcadastroprof').style.display == 'none';
+    var divaparecerprof = document.getElementById('formcadastroprof').style.display == 'block';
+
+    
+    var divocultacli = document.getElementById('formcadastrocli').style.display == 'none';
+    var divaparecercli = document.getElementById('formcadastrocli').style.display == 'block';
+
+
+    if ((divocultacli == divaparecercli) && (divocultaprof == divaparecerprof)) {
+      console.log("insere um ou outro")
+    } else if (a) {
+      
+    }
+    
+  }
+
+    
+  
+
+
 
   async cadastrar(usuario: Usuariocli) {
     if (this.formValidation()) {
