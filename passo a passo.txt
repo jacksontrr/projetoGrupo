@@ -7,5 +7,5 @@ Dentro da pasta que está o projeto faça os seguintes passos
 
 3º npm install firebase angularfire2 --save
 
-Depois só ser triste :')
+Depois só ser triste :') ionic serve
 
