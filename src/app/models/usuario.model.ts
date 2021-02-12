@@ -4,6 +4,7 @@ export interface Usuariocli {
   CPF: number;
   email: string;
   senha: string;
+  telefone: number;
 }
 export interface Usuarioprof {
   nome: string;
@@ -12,4 +13,5 @@ export interface Usuarioprof {
   empresa: string;
   email: string;
   senha: string;
+  telefone: number;
 }

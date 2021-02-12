@@ -76,7 +76,7 @@ export class CadastrarPage implements OnInit {
       });
 
       await alert.present();
-    }else if (this.formValidation()) {
+    } else if (this.formValidation() && divaparecercli) {
       // mostrar loader
       let loader = await this.loadingCtrl.create({
         message: 'Por Favor espere...',
@@ -88,6 +88,7 @@ export class CadastrarPage implements OnInit {
           .createUserWithEmailAndPassword(usuariocli.email, usuariocli.senha)
           .then((dados) => {
             console.log(dados);
+
             // redirecionar para a página home
             this.navCtrl.navigateRoot('home');
           })
