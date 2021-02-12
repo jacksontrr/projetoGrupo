@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, NavController } from '@ionic/angular'; //Importação feita
+import { LoadingController, NavController, Platform } from '@ionic/angular'; //Importação feita
+import { Usuariocli, Usuarioprof } from '../../models/usuario.model';
 
 @Component({
   selector: 'app-login',
@@ -7,12 +8,28 @@ import { LoadingController, NavController } from '@ionic/angular'; //Importaçã
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+
+  verificar: any;
+  usuariocli = {} as Usuariocli;
+  usuarioprof = {} as Usuarioprof;
+
   constructor(
     private loadingCtrl: LoadingController,
-    private navCtrl: NavController 
+    private navCtrl: NavController,
+    private platform: Platform
   ) {}
 
   ngOnInit() {}
+
+  ionViewWillLeave() { // irá sair
+    this.verificar.unsubscribe(); // Vai verificar desiscrever
+  }
+
+  ionViewDidEnter() { // se a view entrou
+    this.verificar = this.platform.backButton.subscribe(() => { // Entrando vai para o app
+      navigator["app"].exitApp();
+    });
+  }
 
   loginaparecer() {
     if (document.getElementById('logindiv').style.display == 'block') {

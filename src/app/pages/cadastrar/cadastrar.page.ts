@@ -3,6 +3,7 @@ import {
   AlertController,
   LoadingController,
   NavController,
+  Platform,
   ToastController,
 } from '@ionic/angular'; //Importação feita
 
@@ -15,6 +16,10 @@ import { AngularFireAuth } from '@angular/fire/auth'; //Importação feita
   styleUrls: ['./cadastrar.page.scss'],
 })
 export class CadastrarPage implements OnInit {
+  verificar: any;
+  usuariocli = {} as Usuariocli;
+  usuarioprof = {} as Usuarioprof;
+
   constructor(
     private loadingCtrl: LoadingController, // Importação do load
     private toastCtrl: ToastController,
@@ -51,7 +56,7 @@ export class CadastrarPage implements OnInit {
 
   //se for none seleciona cliente ou profissão
 
-  async registrar() {
+  async registrar(usuariocli: Usuariocli) {
     var divocultaprof =
       document.getElementById('formcadastroprof').style.display == 'none';
     var divaparecerprof =
@@ -71,13 +76,7 @@ export class CadastrarPage implements OnInit {
       });
 
       await alert.present();
-    } else {
-      console.log('Foi para o else'); // Aqui vai ser feito a parte do cadastrar o usuario
-    }
-  }
-
-  async cadastrar(usuario: Usuariocli) {
-    if (this.formValidation()) {
+    }else if (this.formValidation()) {
       // mostrar loader
       let loader = await this.loadingCtrl.create({
         message: 'Por Favor espere...',
@@ -86,7 +85,7 @@ export class CadastrarPage implements OnInit {
       try {
         // entrar com usuário e senha
         await this.afAuth
-          .createUserWithEmailAndPassword(usuario.email, usuario.senha)
+          .createUserWithEmailAndPassword(usuariocli.email, usuariocli.senha)
           .then((dados) => {
             console.log(dados);
             // redirecionar para a página home
@@ -96,21 +95,21 @@ export class CadastrarPage implements OnInit {
       } catch (e) {
         this.espera(e);
       }
-      // dispensar loader
       loader.dismiss();
+      console.log('Foi para o else'); // Aqui vai ser feito a parte do cadastrar o usuario
     }
   }
 
   formValidation() {
-    if (!this.usuario.email) {
-      // !this.usuario.email
-      // mostrar toast message
+    if (!this.usuariocli.email) {
+      !this.usuariocli.email;
+      //   mostrar toast message
       this.espera('Digite seu e-mail');
       return false;
     }
-    if (!this.usuario.senha) {
-      // !this.usuario.senha
-      // mostrar toast message
+    if (!this.usuariocli.senha) {
+      !this.usuariocli.senha;
+      //   mostrar toast message
       this.espera('Digite sua Senha');
       return false;
     }
