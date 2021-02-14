@@ -20,6 +20,9 @@ export class CadastrarPage implements OnInit {
   verificar: any;
   usuariocli = {} as Usuariocli;
   usuarioprof = {} as Usuarioprof;
+  temporarioemail: string
+  temporariosenha: string
+
 
   constructor(
     private loadingCtrl: LoadingController, // Importação do load
@@ -33,38 +36,60 @@ export class CadastrarPage implements OnInit {
   ngOnInit() {}
 
 
-
-
-
+  // Aparecer a div para pode cadastrar o CLIENTE
 
   aparecercli() {
-    if (document.getElementById('formcadastroprof').style.display == 'block'){
+    if (document.getElementById('formcadastroprof').style.display == 'block') {
       document.getElementById('formcadastroprof').style.display = 'none';
       document.getElementById('botaoprof').style.display = 'none';
       document.getElementById('formcadastrocli').style.display = 'block';
       document.getElementById('botaocli').style.display = 'block';
+
+      this.usuariocli.email = this.usuarioprof.email
+      this.usuariocli.senha = this.usuarioprof.senha
+      this.usuariocli.nome = this.usuarioprof.nome
+      this.usuariocli.endereco = this.usuarioprof.endereco
+      this.usuariocli.telefone = this.usuarioprof.telefone
+
     } else {
       document.getElementById('memediv').style.display = 'none';
       document.getElementById('memebotao').style.display = 'none';
       document.getElementById('formcadastrocli').style.display = 'block';
       document.getElementById('botaocli').style.display = 'block';
+      this.usuariocli.email = this.temporarioemail
+      this.usuariocli.senha = this.temporariosenha
+      this.temporarioemail = ""
+      this.temporariosenha = ""
     }
   }
+
+  // Aparecer a div para pode cadastrar o PROFISSIONAL
   aparecerprof() {
-    if (document.getElementById('formcadastrocli').style.display == 'block'){
+    if (document.getElementById('formcadastrocli').style.display == 'block') {
       document.getElementById('formcadastrocli').style.display = 'none';
       document.getElementById('botaocli').style.display = 'none';
       document.getElementById('formcadastroprof').style.display = 'block';
       document.getElementById('botaoprof').style.display = 'block';
+      this.usuarioprof.email = this.usuariocli.email
+      this.usuarioprof.senha = this.usuariocli.senha
+      this.usuarioprof.nome = this.usuariocli.nome
+      this.usuarioprof.endereco = this.usuariocli.endereco
+      this.usuarioprof.telefone = this.usuariocli.telefone
+
     } else {
       document.getElementById('memediv').style.display = 'none';
       document.getElementById('memebotao').style.display = 'none';
       document.getElementById('formcadastroprof').style.display = 'block';
       document.getElementById('botaoprof').style.display = 'block';
+      this.usuarioprof.email = this.temporarioemail;
+      this.usuarioprof.senha = this.temporariosenha;
+      this.temporarioemail = ""
+      this.temporariosenha = ""
     }
   }
 
-  //se for none seleciona cliente ou profissão
+  //############################################################################################
+  // Cadastrar Cliente e formulario do CLIENTE
 
   async registrarcli(usuariocli: Usuariocli) {
     var divocultaprof =
@@ -86,7 +111,11 @@ export class CadastrarPage implements OnInit {
       });
 
       await alert.present();
-    } else if (this.formValidationcli() && divaparecercli && this.validarFormulariocli()) {
+    } else if (
+      this.formValidationcli() &&
+      divaparecercli &&
+      this.validarFormulariocli()
+    ) {
       // mostrar loader
       let loader = await this.loadingCtrl.create({
         message: 'Por Favor espere...',
@@ -96,108 +125,25 @@ export class CadastrarPage implements OnInit {
         // entrar com usuário e senha
 
         await this.afAuth
-          .createUserWithEmailAndPassword(usuariocli.email, usuariocli.senha)
+          .createUserWithEmailAndPassword(usuariocli.email, usuariocli.senha)//altenticação do CLIENTE
           .then((dados) => {
             console.log(dados);
           })
           .catch();
-        await this.firestore.collection("formularioCli").add(usuariocli);
+        await this.firestore.collection('formularioCli').add(usuariocli);//Vai se jogado dentro da coleção formularioProf
+
         // redirecionar para a página home
         this.navCtrl.navigateRoot('home');
       } catch (e) {
         this.showToast(e);
       }
       loader.dismiss();
-      console.log('Foi Criado com sucesso cli"'); // Aqui vai ser feito a parte do cadastrar o usuario
-    }
-  }
 
-  async registrarprof(usuarioprof: Usuarioprof) {
-    var divocultaprof =
-      document.getElementById('formcadastroprof').style.display == 'none';
-    var divaparecerprof =
-      document.getElementById('formcadastroprof').style.display == 'block';
-
-    var divocultacli =
-      document.getElementById('formcadastrocli').style.display == 'none';
-    var divaparecercli =
-      document.getElementById('formcadastrocli').style.display == 'block';
-
-    if (divocultacli == divaparecercli && divocultaprof == divaparecerprof) {
-      let alert = await this.alertController.create({
-        // Criação do alerta
-        header: 'Atanção',
-        message: 'Selecione uma das opções acima',
-        buttons: ['Voltar'],
-      });
-
-      await alert.present();
-    } else if (this.formValidationprof() && divaparecercli && this.validarFormularioprof()) {
-      // mostrar loader
-      let loader = await this.loadingCtrl.create({
-        message: 'Por Favor espere...',
-      });
-      loader.present();
-      try {
-        // entrar com usuário e senha
-
-        await this.afAuth
-          .createUserWithEmailAndPassword(usuarioprof.email, usuarioprof.senha)
-          .then((dados) => {
-            console.log(dados);
-          })
-          .catch();
-        await this.firestore.collection("formularioProf").add(usuarioprof);
-        // redirecionar para a página home
-        this.navCtrl.navigateRoot('home');
-      } catch (e) {
-        this.showToast(e);
-      }
-      loader.dismiss();
-      console.log('Foi Criado com sucesso prof"'); // Aqui vai ser feito a parte do cadastrar o usuario
     }
   }
 
 
-  validarFormularioprof() {
-    if (!this.usuarioprf.nome) {
-      this.showToast('Digite o nome');
-      return false;
-    }
-    if (!this.usuarioprf.telefone) {
-      this.showToast('Digite o telefone');
-      return false;
-    }
-    if (!this.usuarioprf.endereco) {
-      this.showToast('Digite o endereço');
-      return false;
-    }
-    if (!this.usuarioprof.CPFCNPJ) {
-      this.showToast('Digite o CPF');
-      return false;
-    }
-    i
-    return true;
-  }
-
-
-  //
-  formValidationprof() {
-    if (!this.usuarioprf.email) {
-      !this.usuarioprf.email;
-      //   mostrar toast message
-      this.showToast('Digite seu e-mail');
-      return false;
-    }
-    if (!this.usuarioprf.senha) {
-      !this.usuarioprf.senha;
-      //   mostrar toast message
-      this.showToast('Digite sua Senha');
-      return false;
-    }
-    return true;
-  }
-
+    // Validação do formulario CLIENTE
   validarFormulariocli() {
     if (!this.usuariocli.nome) {
       this.showToast('Digite o nome');
@@ -218,8 +164,7 @@ export class CadastrarPage implements OnInit {
     return true;
   }
 
-
-  //
+  // Validação do CLIENTE
   formValidationcli() {
     if (!this.usuariocli.email) {
       !this.usuariocli.email;
@@ -243,10 +188,106 @@ export class CadastrarPage implements OnInit {
       duration: 900,
     });
   }
+
+  //############################################################################################
+  // Cadastrar profissional e formulario do PROFISSIONAL
+
+  async registrarprof(usuarioprof: Usuarioprof) {
+    var divocultaprof =
+      document.getElementById('formcadastroprof').style.display == 'none';
+    var divaparecerprof =
+      document.getElementById('formcadastroprof').style.display == 'block';
+
+    var divocultacli =
+      document.getElementById('formcadastrocli').style.display == 'none';
+    var divaparecercli =
+      document.getElementById('formcadastrocli').style.display == 'block';
+
+    if (divocultacli == divaparecercli && divocultaprof == divaparecerprof) {
+      let alert = await this.alertController.create({
+        // Criação do alerta
+        header: 'Atanção',
+        message: 'Selecione uma das opções acima',
+        buttons: ['Voltar'],
+      });
+
+      await alert.present();
+    } else if (
+      this.formValidationprof() &&
+      divaparecerprof &&
+      this.validarFormularioprof()
+    ) {
+      // mostrar loader
+      let loader = await this.loadingCtrl.create({
+        message: 'Por Favor espere...',
+      });
+      loader.present();
+      try {
+        // entrar com usuário e senha
+
+        await this.afAuth
+          .createUserWithEmailAndPassword(usuarioprof.email, usuarioprof.senha)//altenticação do PROFISSIONAL
+          .then((dados) => {
+            console.log(dados);
+          })
+          .catch();
+        await this.firestore.collection('formularioProf').add(usuarioprof); //Vai se jogado dentro da coleção formularioProf
+        // redirecionar para a página home
+        this.navCtrl.navigateRoot('home');
+      } catch (e) {
+        this.showToast(e);
+      }
+      loader.dismiss();
+      console.log('Foi Criado com sucesso prof"'); // Aqui vai ser feito a parte do cadastrar o usuario
+    }
+  }
+
+  validarFormularioprof() {
+    if (!this.usuarioprof.nome) {
+      this.showToast('Digite o nome');
+      return false;
+    }
+    if (!this.usuarioprof.telefone) {
+      this.showToast('Digite o telefone');
+      return false;
+    }
+    if (!this.usuarioprof.endereco) {
+      this.showToast('Digite o endereço');
+      return false;
+    }
+    if (!this.usuarioprof.CPFCNPJ) {
+      this.showToast('Digite o CPF ou CNPJ da empresa');
+      return false;
+    }
+    if (!this.usuarioprof.empresa) {
+      this.showToast('Digite o nome da empresa');
+      return false;
+    }
+    return true;
+  }
+
+  formValidationprof() {
+    if (!this.usuarioprof.email) {
+      !this.usuarioprof.email;
+      //   mostrar toast message
+      this.showToast('Digite seu e-mail');
+      return false;
+    }
+    if (!this.usuarioprof.senha) {
+      !this.usuarioprof.senha;
+      //   mostrar toast message
+      this.showToast('Digite sua Senha');
+      return false;
+    }
+    return true;
+  }
+
+  //#############################################################################################
+
   showToast(mensagem: string) {
     this.toastCtrl
       .create({
-        message: mensagem,
+        message: mensagem, // Mensagem de erro
         duration: 900,
       })
       .then((toastData) => toastData.present());
@@ -262,4 +303,4 @@ export class CadastrarPage implements OnInit {
     this.navCtrl.navigateRoot('login'); //Rota, a string inserido nas aspas será direcionado.
     aguarde.present(); //Encerrar a tela de load.
   }
-}
+} // fim do export class CadastrarPage implements OnInit

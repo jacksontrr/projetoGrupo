@@ -16,11 +16,11 @@
   <div id="memediv">
     <ion-item>
       <ion-label position="floating">E-mail</ion-label>
-      <ion-input type="E-mail" required></ion-input>
+      <ion-input [(ngModel)]="temporarioemail" type="E-mail" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Senha</ion-label>
-      <ion-input type="password" required></ion-input>
+      <ion-input [(ngModel)]="temporariosenha" type="password" required></ion-input>
     </ion-item>
   </div>
 
@@ -94,11 +94,11 @@
 
   <!-- Botão do cliente -->
   <ion-col id="botaocli" size="6">
-    <ion-button class="ion-text-center" expand="block" color="success" (click)="registrarcli(usuariocli)" >Continuar cli</ion-button>
+    <ion-button class="ion-text-center" expand="block" color="success" (click)="registrarcli(usuariocli)" >Continuar</ion-button>
   </ion-col>
     <!-- Botão do Profissional -->
   <ion-col id="botaoprof" size="6">
-    <ion-button class="ion-text-center" expand="block" color="success" (click)="registrarprof(usuarioprof)" >Continuar prof</ion-button>
+    <ion-button class="ion-text-center" expand="block" color="success" (click)="registrarprof(usuarioprof)" >Continuar</ion-button>
   </ion-col>
   <!-- botão do meme -->
   <ion-col id="memebotao" size="6">
