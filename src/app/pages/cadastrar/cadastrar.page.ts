@@ -129,10 +129,7 @@ export class CadastrarPage implements OnInit {
             console.log(dados);
           })
           .catch();
-          await this.firestore.collection('formularioCli').add(usuariocli.CPF);//Vai se jogado dentro da coleção formularioProf
-          await this.firestore.collection('formularioCli').add(usuariocli.nome);//Vai se jogado dentro da coleção formularioProf
-          await this.firestore.collection('formularioCli').add(usuariocli.telefone);//Vai se jogado dentro da coleção formularioProf
-          await this.firestore.collection('formularioCli').add(usuariocli.endereco);//Vai se jogado dentro da coleção formularioProf
+          await this.firestore.collection('formularioCli').add(usuariocli);//Vai se jogado dentro da coleção formularioProf
 
         // redirecionar para a página home
         this.navCtrl.navigateRoot('home');
@@ -233,12 +230,7 @@ export class CadastrarPage implements OnInit {
             console.log(dados);
           })
           .catch();
-          await this.firestore.collection('formularioProf').add(usuarioprof.CPFCNPJ); //Vai se jogado dentro da coleção formularioProf
-          await this.firestore.collection('formularioProf').add(usuarioprof.empresa); //Vai se jogado dentro da coleção formularioProf
-          await this.firestore.collection('formularioProf').add(usuarioprof.endereco); //Vai se jogado dentro da coleção formularioProf
-          await this.firestore.collection('formularioProf').add(usuarioprof.nome); //Vai se jogado dentro da coleção formularioProf
-          await this.firestore.collection('formularioProf').add(usuarioprof.telefone); //Vai se jogado dentro da coleção formularioProf
-
+          await this.firestore.collection('formularioProf').add(usuarioprof); //Vai se jogado dentro da coleção formularioProf
           // redirecionar para a página home
         this.navCtrl.navigateRoot('home');
       } catch (e) {
@@ -295,7 +287,7 @@ export class CadastrarPage implements OnInit {
     this.toastCtrl
       .create({
         message: mensagem, // Mensagem de erro
-        duration: 900,
+        duration: 2000,
       })
       .then((toastData) => toastData.present());
   }

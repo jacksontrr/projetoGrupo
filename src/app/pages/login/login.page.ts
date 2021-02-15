@@ -4,8 +4,7 @@ import { Usuariocli, Usuarioprof } from '../../models/usuariocli.model';
 
 
 
-import { AngularFireAuth } from '@angular/fire/auth'; //Importação feita
-import { AngularFirestore } from '@angular/fire/firestore'; // importação feita
+import { AngularFireAuth } from "@angular/fire/auth";
 
 @Component({
   selector: 'app-login',
@@ -21,7 +20,6 @@ export class LoginPage implements OnInit {
   constructor(
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
-    private firestore: AngularFirestore,
     private afAuth: AngularFireAuth,
     private navCtrl: NavController,
     private platform: Platform
@@ -61,7 +59,7 @@ export class LoginPage implements OnInit {
           .signInWithEmailAndPassword(usuariocli.email, usuariocli.senha)
           .then((data) => {
 
-            await this.firestore.collection("formularioCli").   ;
+
             console.log(data);
             //redirecionar para home page
             this.navCtrl.navigateRoot("home");
