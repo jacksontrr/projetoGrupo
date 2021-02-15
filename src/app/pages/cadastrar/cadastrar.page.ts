@@ -9,7 +9,7 @@ import {
 
 import { Usuariocli, Usuarioprof } from '../../models/usuario.model'; // Importação feita
 import { AngularFireAuth } from '@angular/fire/auth'; //Importação feita
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore'; // importação feita
 
 @Component({
   selector: 'app-cadastrar',
@@ -58,9 +58,8 @@ export class CadastrarPage implements OnInit {
       document.getElementById('botaocli').style.display = 'block';
       this.usuariocli.email = this.temporarioemail
       this.usuariocli.senha = this.temporariosenha
-      this.temporarioemail = ""
-      this.temporariosenha = ""
-    }
+      this.temporarioemail = this.temporarioemail;
+      this.temporariosenha = this.temporariosenha;    }
   }
 
   // Aparecer a div para pode cadastrar o PROFISSIONAL
@@ -83,8 +82,8 @@ export class CadastrarPage implements OnInit {
       document.getElementById('botaoprof').style.display = 'block';
       this.usuarioprof.email = this.temporarioemail;
       this.usuarioprof.senha = this.temporariosenha;
-      this.temporarioemail = ""
-      this.temporariosenha = ""
+      this.temporarioemail = this.temporarioemail;
+      this.temporariosenha = this.temporariosenha;
     }
   }
 
@@ -130,7 +129,10 @@ export class CadastrarPage implements OnInit {
             console.log(dados);
           })
           .catch();
-        await this.firestore.collection('formularioCli').add(usuariocli);//Vai se jogado dentro da coleção formularioProf
+          await this.firestore.collection('formularioCli').add(usuariocli.CPF);//Vai se jogado dentro da coleção formularioProf
+          await this.firestore.collection('formularioCli').add(usuariocli.nome);//Vai se jogado dentro da coleção formularioProf
+          await this.firestore.collection('formularioCli').add(usuariocli.telefone);//Vai se jogado dentro da coleção formularioProf
+          await this.firestore.collection('formularioCli').add(usuariocli.endereco);//Vai se jogado dentro da coleção formularioProf
 
         // redirecionar para a página home
         this.navCtrl.navigateRoot('home');
@@ -231,8 +233,13 @@ export class CadastrarPage implements OnInit {
             console.log(dados);
           })
           .catch();
-        await this.firestore.collection('formularioProf').add(usuarioprof); //Vai se jogado dentro da coleção formularioProf
-        // redirecionar para a página home
+          await this.firestore.collection('formularioProf').add(usuarioprof.CPFCNPJ); //Vai se jogado dentro da coleção formularioProf
+          await this.firestore.collection('formularioProf').add(usuarioprof.empresa); //Vai se jogado dentro da coleção formularioProf
+          await this.firestore.collection('formularioProf').add(usuarioprof.endereco); //Vai se jogado dentro da coleção formularioProf
+          await this.firestore.collection('formularioProf').add(usuarioprof.nome); //Vai se jogado dentro da coleção formularioProf
+          await this.firestore.collection('formularioProf').add(usuarioprof.telefone); //Vai se jogado dentro da coleção formularioProf
+
+          // redirecionar para a página home
         this.navCtrl.navigateRoot('home');
       } catch (e) {
         this.showToast(e);
