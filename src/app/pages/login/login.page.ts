@@ -5,7 +5,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 
 
 import { AngularFireAuth } from "@angular/fire/auth";
-
+import { map } from 'rxjs/operators'
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
   verificar: any;
   usuariocli = {} as Usuariocli;
   usuarioprof = {} as Usuarioprof;
-  private formCollection: AngularFirestoreCollection<Form>;
+
 
 
   constructor(
@@ -55,7 +55,6 @@ export class LoginPage implements OnInit {
 
 
 
-
   async login(usuariocli: Usuariocli) {
     if (this.formValidationcli()) {
       let loader = await this.loadingCtrl.create({
@@ -66,17 +65,17 @@ export class LoginPage implements OnInit {
         // login user with email e senha
         await this.afAuth.signInWithEmailAndPassword(usuariocli.email, usuariocli.senha).then((data) => {
             console.log(data);
-            this.firestore
-            .collection('formularioCli')
-            .snapshotChanges((dado) =>{ this.validar})
-          /*  .subscribe((dado) => {
-              this.validar = dado.map((e) => {
-                return {
-                  email: e.payload.doc.data()['email']
-                };
-              });
-              loader.dismiss();
-            });*/
+
+            this.firestore.collection('formularioCli').snapshotChanges().pipe(
+              map(  action => {
+              return action.map(e => {
+                const data = e.payload.doc.data();
+                const id = e.payload.doc.id;
+                const form = e.payload.doc.data()['email'];
+
+               return {id, form};
+              })
+            }));
 
 
             //redirecionar para home page
