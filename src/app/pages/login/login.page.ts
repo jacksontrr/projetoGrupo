@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, NavController, Platform, ToastController} from '@ionic/angular'; //Importação feita
-import { Usuariocli, Usuarioprof } from '../../models/usuariocli.model';
-
+import { Usuariocli, Usuarioprof } from '../../models/usuario.model'// importação feita
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore'; // importação feita
 
 
 import { AngularFireAuth } from "@angular/fire/auth";
+
 
 @Component({
   selector: 'app-login',
@@ -12,18 +13,23 @@ import { AngularFireAuth } from "@angular/fire/auth";
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
+  validar: any;
   verificar: any;
   usuariocli = {} as Usuariocli;
   usuarioprof = {} as Usuarioprof;
+  private formCollection: AngularFirestoreCollection<Form>;
+
 
   constructor(
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
     private afAuth: AngularFireAuth,
     private navCtrl: NavController,
-    private platform: Platform
-  ) {}
+    private firestore: AngularFirestore,
+    private platform: Platform,
+  ) {
+
+  }
 
   ngOnInit() {}
 
@@ -47,6 +53,9 @@ export class LoginPage implements OnInit {
 
 
 
+
+
+
   async login(usuariocli: Usuariocli) {
     if (this.formValidationcli()) {
       let loader = await this.loadingCtrl.create({
@@ -55,14 +64,24 @@ export class LoginPage implements OnInit {
       loader.present();
       try {
         // login user with email e senha
-        await this.afAuth
-          .signInWithEmailAndPassword(usuariocli.email, usuariocli.senha)
-          .then((data) => {
-
-
+        await this.afAuth.signInWithEmailAndPassword(usuariocli.email, usuariocli.senha).then((data) => {
             console.log(data);
+            this.firestore
+            .collection('formularioCli')
+            .snapshotChanges((dado) =>{ this.validar})
+          /*  .subscribe((dado) => {
+              this.validar = dado.map((e) => {
+                return {
+                  email: e.payload.doc.data()['email']
+                };
+              });
+              loader.dismiss();
+            });*/
+
+
             //redirecionar para home page
             this.navCtrl.navigateRoot("home");
+
           })
           .catch();
       } catch (e) {
@@ -85,6 +104,16 @@ export class LoginPage implements OnInit {
     }
     return true;
   }
+
+  /*snapshotChanges = visualiza as informações salvas no firebase  lista em tempo real.
+  valueChanges é a informação que em algum momento foi modificada.
+  doc é a informação de cada coluna da coleção seguindo o id.
+  O subscribe é como se fosse um comando de conclusão para apresentar algo na tela.
+*/
+
+
+
+
 
 
 //##########################################################################################################
