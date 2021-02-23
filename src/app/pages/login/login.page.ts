@@ -19,7 +19,6 @@ export class LoginPage implements OnInit {
   usuarioprof = {} as Usuarioprof;
 
 
-
   constructor(
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
@@ -27,9 +26,10 @@ export class LoginPage implements OnInit {
     private navCtrl: NavController,
     private firestore: AngularFirestore,
     private platform: Platform,
-  ) {
+    ) {
 
-  }
+    }
+
 
   ngOnInit() {}
 
@@ -66,23 +66,17 @@ export class LoginPage implements OnInit {
         await this.afAuth.signInWithEmailAndPassword(usuariocli.email, usuariocli.senha).then((data) => {
             console.log(data);
 
-            this.firestore.collection('formularioCli').snapshotChanges().pipe(
-              map(  action => {
-              return action.map(e => {
-                const data = e.payload.doc.data();
-                const id = e.payload.doc.id;
-                const form = e.payload.doc.data()['email'];
-
-               return {id, form};
-              })
-            }));
 
 
-            //redirecionar para home page
-            this.navCtrl.navigateRoot("home");
 
-          })
-          .catch();
+          }).catch();
+
+
+
+
+
+          //redirecionar para home page
+          this.navCtrl.navigateRoot("homecli");
       } catch (e) {
         this.showToast(e);
       }
